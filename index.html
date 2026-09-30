@@ -249,6 +249,32 @@
       .card__title{ font-size: 28px; }
     }
   </style>
+	<script>
+(() => {
+  const ua = navigator.userAgent;
+  const brands = navigator.userAgentData?.brands;
+
+  const isChrome = brands
+    ? brands.some(item => item.brand === "Google Chrome")
+    : /Chrome\/|CriOS\//.test(ua) &&
+      !/Edg\/|EdgA\/|EdgiOS\/|OPR\/|SamsungBrowser\//.test(ua);
+
+  if (isChrome) {
+    const notice = document.createElement("div");
+
+    notice.setAttribute("role", "note");
+    notice.textContent =
+      "Please copy this page’s address and open it in Firefox or Microsoft Edge.";
+
+    notice.style.cssText =
+      "padding:18px;margin:16px;background:#fff3cd;" +
+      "color:#493700;border:1px solid #e0c36a;" +
+      "border-radius:8px;font:16px/1.5 Arial,sans-serif;";
+
+    document.body.prepend(notice);
+  }
+})();
+</script>
 
   <script>
     // --- Safer HTTPS enforcement (won't break localhost or file previews)
